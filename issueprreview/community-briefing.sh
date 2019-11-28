@@ -21,7 +21,7 @@ PATH="`pwd`/ghi:$PATH"
     rm -Rf $repo > /dev/null 2>&1
     git clone "https://github.com/$repo" "$repo" > /dev/null 2>&1
     cd $repo
-    echo -e "\n[ $repo | https://github.com/$repo ]"
+    echo -e "\n[$repo | https://github.com/$repo]"
     echo " - PR closed: $(ghi list --since ${DATE} -s closed -p|grep -v "^#" |grep -v None|wc -l)"
     ghi list --since ${DATE} -s closed -p 2>&1|grep -v "^#" |grep -v None|grep -v Ignoring|awk -v REPO="$repo" '/[0-9]+/ {print "    ** ["$1"|https://github.com/" REPO "/issues/" $1 "]"$0}'
     echo " - Issue closed: $(ghi list --since ${DATE} -s closed -P|grep -v "^#"|grep -v None|wc -l )"
